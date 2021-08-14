@@ -17,7 +17,7 @@ const Icon = ({ nama }) => {
   if (nama === "Cemilan")
     return <FontAwesomeIcon icon={faCheese} className="me-2" />;
 
-  return <FontAwesomeIcon icon={faUtensils} className="me-2" />;
+  return <FontAwesomeIcon icon={faUtensils} className="ms-1 me-2" />;
 };
 
 class ListCategories extends Component {

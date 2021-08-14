@@ -7,10 +7,14 @@ const imgStyle = {
   objectFit: "cover",
 };
 
-function Menus({ menu }) {
+function Menus({ menu, addToCart }) {
   return (
     <Col md={4} xs={6} className="mb-4">
-      <Card className="shadow">
+      <Card
+        className="shadow"
+        onClick={() => addToCart(menu)}
+        style={{ cursor: "pointer" }}
+      >
         <Card.Img
           variant="top"
           src={`assets/images/${menu.category.nama.toLowerCase()}/${

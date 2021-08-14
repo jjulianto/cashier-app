@@ -11,6 +11,7 @@ class App extends Component {
     this.state = {
       menus: [],
       categoryChoose: "Makanan",
+      keranjangs: [],
     };
   }
 
@@ -24,6 +25,30 @@ class App extends Component {
       .catch((error) => {
         console.log(error);
       });
+
+    axios
+      .get(`${API_URL}keranjangs`)
+      .then((response) => {
+        const keranjangs = response.data;
+        this.setState({ keranjangs });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
+  componentDidUpdate(prevState) {
+    if (this.state.keranjangs !== prevState.keranjangs) {
+      axios
+        .get(`${API_URL}keranjangs`)
+        .then((response) => {
+          const keranjangs = response.data;
+          this.setState({ keranjangs });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
 
   changeCategory = (value) => {
@@ -43,8 +68,49 @@ class App extends Component {
       });
   };
 
+  addToCart = (value) => {
+    axios
+      .get(`${API_URL}keranjangs?product.id=${value.id}`)
+      .then((response) => {
+        if (response.data.length === 0) {
+          const keranjang = {
+            jumlah: 1,
+            total_harga: value.harga,
+            product: value,
+          };
+
+          axios
+            .post(`${API_URL}keranjangs`, keranjang)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        } else {
+          const keranjang = {
+            jumlah: response.data[0].jumlah + 1,
+            total_harga: response.data[0].total_harga + value.harga,
+            product: value,
+          };
+
+          axios
+            .put(`${API_URL}keranjangs/${response.data[0].id}`, keranjang)
+            .then((response) => {
+              console.log(response);
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
   render() {
-    const { menus, categoryChoose } = this.state;
+    const { menus, categoryChoose, keranjangs } = this.state;
     return (
       <div>
         <NavbarComponent />
@@ -62,10 +128,16 @@ class App extends Component {
                 <hr />
                 <Row>
                   {menus &&
-                    menus.map((menu) => <Menus key={menu.id} menu={menu} />)}
+                    menus.map((menu) => (
+                      <Menus
+                        key={menu.id}
+                        menu={menu}
+                        addToCart={this.addToCart}
+                      />
+                    ))}
                 </Row>
               </Col>
-              <Result />
+              <Result keranjangs={keranjangs} />
             </Row>
           </Container>
         </div>
