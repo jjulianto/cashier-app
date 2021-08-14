@@ -185,8 +185,8 @@
   ],
   "keranjangs": [
     {
-      "jumlah": 2,
-      "total_harga": 32000,
+      "jumlah": 3,
+      "total_harga": 48000,
       "product": {
         "id": 1,
         "kode": "K-01",
@@ -217,23 +217,6 @@
         }
       },
       "id": 2
-    },
-    {
-      "jumlah": 1,
-      "total_harga": 15000,
-      "product": {
-        "id": 11,
-        "kode": "K-011",
-        "nama": "Coffe Late",
-        "harga": 15000,
-        "is_ready": true,
-        "gambar": "coffe-late.jpg",
-        "category": {
-          "id": 2,
-          "nama": "Minuman"
-        }
-      },
-      "id": 3
     }
   ],
   "pesanans": [

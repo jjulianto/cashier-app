@@ -26,6 +26,10 @@ class App extends Component {
         console.log(error);
       });
 
+    this.getListCart();
+  }
+
+  getListCart = () => {
     axios
       .get(`${API_URL}keranjangs`)
       .then((response) => {
@@ -35,21 +39,7 @@ class App extends Component {
       .catch((error) => {
         console.log(error);
       });
-  }
-
-  componentDidUpdate(prevState) {
-    if (this.state.keranjangs !== prevState.keranjangs) {
-      axios
-        .get(`${API_URL}keranjangs`)
-        .then((response) => {
-          const keranjangs = response.data;
-          this.setState({ keranjangs });
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }
+  };
 
   changeCategory = (value) => {
     this.setState({
@@ -82,6 +72,7 @@ class App extends Component {
           axios
             .post(`${API_URL}keranjangs`, keranjang)
             .then((response) => {
+              this.getListCart();
               console.log(response);
             })
             .catch((error) => {
@@ -97,6 +88,7 @@ class App extends Component {
           axios
             .put(`${API_URL}keranjangs/${response.data[0].id}`, keranjang)
             .then((response) => {
+              this.getListCart();
               console.log(response);
             })
             .catch((error) => {
