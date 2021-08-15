@@ -113,7 +113,7 @@ class Home extends Component {
             />
             <Col>
               <h4>
-                <strong>List Product</strong>
+                <strong>List Products</strong>
               </h4>
               <hr />
               <Row>
@@ -127,7 +127,7 @@ class Home extends Component {
                   ))}
               </Row>
             </Col>
-            <Cart keranjangs={keranjangs} />
+            <Cart keranjangs={keranjangs} {...this.props} />
           </Row>
         </Container>
       </div>
