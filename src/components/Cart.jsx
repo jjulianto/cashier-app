@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import { Col, ListGroup, Row, Badge } from "react-bootstrap";
 import numberWithCommas from "../utils/utils";
 
-class Result extends Component {
+class Cart extends Component {
   render() {
     const { keranjangs } = this.props;
     return (
       <Col md={3} mt="2">
         <h4>
-          <strong>Result</strong>
+          <strong>Cart</strong>
         </h4>
         <hr />
         {keranjangs.length !== 0 && (
@@ -44,4 +44,4 @@ class Result extends Component {
   }
 }
 
-export default Result;
+export default Cart;

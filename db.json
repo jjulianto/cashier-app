@@ -185,8 +185,8 @@
   ],
   "keranjangs": [
     {
-      "jumlah": 3,
-      "total_harga": 48000,
+      "jumlah": 2,
+      "total_harga": 32000,
       "product": {
         "id": 1,
         "kode": "K-01",
@@ -202,18 +202,18 @@
       "id": 1
     },
     {
-      "jumlah": 2,
-      "total_harga": 28000,
+      "jumlah": 1,
+      "total_harga": 15000,
       "product": {
-        "id": 2,
-        "kode": "K-02",
-        "nama": "Nasi Goreng Telur",
-        "harga": 14000,
+        "id": 11,
+        "kode": "K-011",
+        "nama": "Coffe Late",
+        "harga": 15000,
         "is_ready": true,
-        "gambar": "nasi-goreng-telor.jpg",
+        "gambar": "coffe-late.jpg",
         "category": {
-          "id": 1,
-          "nama": "Makanan"
+          "id": 2,
+          "nama": "Minuman"
         }
       },
       "id": 2
