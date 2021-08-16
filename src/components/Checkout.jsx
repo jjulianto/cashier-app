@@ -43,7 +43,7 @@ class Checkout extends Component {
         <Row>
           <Col md={{ span: 3, offset: 9 }} className="px-4">
             <h5 className="d-flex justify-content-between me-1">
-              Total Price: <strong>Rp. {numberWithCommas(checkout)}</strong>
+              Price Total: <strong>Rp. {numberWithCommas(checkout)}</strong>
             </h5>
             <div className="d-grid mb-2 mt-3">
               <Button
