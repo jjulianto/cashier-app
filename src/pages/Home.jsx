@@ -116,7 +116,7 @@ class Home extends Component {
                 <strong>List Products</strong>
               </h4>
               <hr />
-              <Row>
+              <Row className="overflow-auto menu mb-2">
                 {menus &&
                   menus.map((menu) => (
                     <Menus

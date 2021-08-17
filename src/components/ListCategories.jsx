@@ -50,7 +50,7 @@ class ListCategories extends Component {
           <strong>List Category</strong>
         </h4>
         <hr />
-        <ListGroup>
+        <ListGroup className="mb-4">
           {categories &&
             categories.map((category) => (
               <ListGroup.Item

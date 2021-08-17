@@ -1,6 +1,6 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { Button, Col, Row } from "react-bootstrap";
@@ -39,25 +39,49 @@ class Checkout extends Component {
     }, 0);
 
     return (
-      <div className="fixed-bottom">
-        <Row>
-          <Col md={{ span: 3, offset: 9 }} className="px-4">
-            <h5 className="d-flex justify-content-between me-1">
-              Price Total: <strong>Rp. {numberWithCommas(checkout)}</strong>
-            </h5>
-            <div className="d-grid mb-2 mt-3">
-              <Button
-                variant="primary"
-                size="lg"
-                onClick={() => this.submitTotalPrice(checkout)}
-              >
-                <FontAwesomeIcon icon={faShoppingCart} />{" "}
-                <strong>CHECKOUT</strong>
-              </Button>
-            </div>
-          </Col>
-        </Row>
-      </div>
+      <Fragment>
+        {/* Web */}
+        <div className="fixed-bottom d-none d-md-block">
+          <Row>
+            <Col md={{ span: 3, offset: 9 }} className="pe-4">
+              <h5 className="d-flex justify-content-between me-1">
+                Price Total: <strong>Rp. {numberWithCommas(checkout)}</strong>
+              </h5>
+              <div className="d-grid mb-2 mt-3">
+                <Button
+                  variant="primary"
+                  size="lg"
+                  onClick={() => this.submitTotalPrice(checkout)}
+                >
+                  <FontAwesomeIcon icon={faShoppingCart} />{" "}
+                  <strong>CHECKOUT</strong>
+                </Button>
+              </div>
+            </Col>
+          </Row>
+        </div>
+
+        {/* Mobile */}
+        <div className="d-block d-md-none">
+          <Row>
+            <Col md={{ span: 3, offset: 9 }}>
+              <h5 className="d-flex justify-content-between me-1">
+                Price Total: <strong>Rp. {numberWithCommas(checkout)}</strong>
+              </h5>
+              <div className="d-grid mb-2 mt-3">
+                <Button
+                  variant="primary"
+                  size="lg"
+                  onClick={() => this.submitTotalPrice(checkout)}
+                >
+                  <FontAwesomeIcon icon={faShoppingCart} />{" "}
+                  <strong>CHECKOUT</strong>
+                </Button>
+              </div>
+            </Col>
+          </Row>
+        </div>
+      </Fragment>
     );
   }
 }

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import Swal from "sweetalert2";
-import { Col, ListGroup, Row, Badge } from "react-bootstrap";
+import { Col, ListGroup, Row, Badge, Card } from "react-bootstrap";
 import numberWithCommas from "../utils/utils";
 import CartModal from "./CartModal";
 import Checkout from "./Checkout";
@@ -120,43 +120,45 @@ class Cart extends Component {
         </h4>
         <hr />
         {keranjangs.length !== 0 && (
-          <ListGroup variant="flush">
-            {keranjangs.map((menuKeranjang) => (
-              <ListGroup.Item
-                key={menuKeranjang.id}
-                onClick={() => this.handleShow(menuKeranjang)}
-                style={{ cursor: "pointer" }}
-              >
-                <Row>
-                  <Col xs={2}>
-                    <h4>
-                      <Badge pill bg="success">
-                        {menuKeranjang.jumlah}
-                      </Badge>
-                    </h4>
-                  </Col>
-                  <Col>
-                    <h5>{menuKeranjang.product.nama}</h5>
-                    <p>Rp. {numberWithCommas(menuKeranjang.product.harga)}</p>
-                  </Col>
-                  <Col className="d-flex justify-content-end">
-                    <strong>
-                      Rp. {numberWithCommas(menuKeranjang.total_harga)}
-                    </strong>
-                  </Col>
-                </Row>
-              </ListGroup.Item>
-            ))}
-            <CartModal
-              handleClose={this.handleClose}
-              {...this.state}
-              plus={this.plus}
-              minus={this.minus}
-              changeHandler={this.changeHandler}
-              handleSubmit={this.handleSubmit}
-              deleteOrder={this.deleteOrder}
-            />
-          </ListGroup>
+          <Card className="overflow-auto cart">
+            <ListGroup variant="flush">
+              {keranjangs.map((menuKeranjang) => (
+                <ListGroup.Item
+                  key={menuKeranjang.id}
+                  onClick={() => this.handleShow(menuKeranjang)}
+                  style={{ cursor: "pointer" }}
+                >
+                  <Row>
+                    <Col xs={2}>
+                      <h4>
+                        <Badge pill bg="success">
+                          {menuKeranjang.jumlah}
+                        </Badge>
+                      </h4>
+                    </Col>
+                    <Col>
+                      <h5>{menuKeranjang.product.nama}</h5>
+                      <p>Rp. {numberWithCommas(menuKeranjang.product.harga)}</p>
+                    </Col>
+                    <Col className="d-flex justify-content-end">
+                      <strong>
+                        Rp. {numberWithCommas(menuKeranjang.total_harga)}
+                      </strong>
+                    </Col>
+                  </Row>
+                </ListGroup.Item>
+              ))}
+              <CartModal
+                handleClose={this.handleClose}
+                {...this.state}
+                plus={this.plus}
+                minus={this.minus}
+                changeHandler={this.changeHandler}
+                handleSubmit={this.handleSubmit}
+                deleteOrder={this.deleteOrder}
+              />
+            </ListGroup>
+          </Card>
         )}
         <Checkout keranjangs={keranjangs} {...this.props} />
       </Col>
