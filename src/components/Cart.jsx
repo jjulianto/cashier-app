@@ -1,8 +1,11 @@
 import React, { Component } from "react";
+import axios from "axios";
+import Swal from "sweetalert2";
 import { Col, ListGroup, Row, Badge } from "react-bootstrap";
 import numberWithCommas from "../utils/utils";
 import CartModal from "./CartModal";
 import Checkout from "./Checkout";
+import { API_URL } from "../utils/constants";
 
 class Cart extends Component {
   constructor(props) {
@@ -36,6 +39,8 @@ class Cart extends Component {
   plus = () => {
     this.setState({
       jumlah: this.state.jumlah + 1,
+      totalHarga:
+        this.state.keranjangDetail.product.harga * (this.state.jumlah + 1),
     });
   };
 
@@ -43,6 +48,8 @@ class Cart extends Component {
     if (this.state.jumlah > 1) {
       this.setState({
         jumlah: this.state.jumlah - 1,
+        totalHarga:
+          this.state.keranjangDetail.product.harga * (this.state.jumlah - 1),
       });
     }
   };
@@ -56,6 +63,52 @@ class Cart extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.handleClose();
+
+    const data = {
+      jumlah: this.state.jumlah,
+      total_harga: this.state.totalHarga,
+      product: this.state.keranjangDetail.product,
+      keterangan: this.state.keterangan,
+    };
+
+    axios
+      .put(`${API_URL}keranjangs/${this.state.keranjangDetail.id}`, data)
+      .then((response) => {
+        this.props.getListCart();
+        Swal.fire({
+          icon: "success",
+          title: "Success",
+          text: "Successfully Update Order",
+        });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
+
+  deleteOrder = (id) => {
+    this.handleClose();
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#22668a",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        axios
+          .delete(`${API_URL}keranjangs/${id}`)
+          .then((response) => {
+            this.props.getListCart();
+            Swal.fire("Success", "Successfully Delete Order.", "success");
+          })
+          .catch((error) => {
+            console.log(error);
+          });
+      }
+    });
   };
 
   render() {
@@ -101,6 +154,7 @@ class Cart extends Component {
               minus={this.minus}
               changeHandler={this.changeHandler}
               handleSubmit={this.handleSubmit}
+              deleteOrder={this.deleteOrder}
             />
           </ListGroup>
         )}

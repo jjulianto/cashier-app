@@ -127,7 +127,11 @@ class Home extends Component {
                   ))}
               </Row>
             </Col>
-            <Cart keranjangs={keranjangs} {...this.props} />
+            <Cart
+              keranjangs={keranjangs}
+              getListCart={this.getListCart}
+              {...this.props}
+            />
           </Row>
         </Container>
       </div>

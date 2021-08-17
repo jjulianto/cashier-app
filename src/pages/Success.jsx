@@ -18,7 +18,7 @@ class Success extends Component {
         });
       })
       .catch((error) => {
-        console.log("Error yaa ", error);
+        console.log(error);
       });
   }
 

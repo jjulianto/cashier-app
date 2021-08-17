@@ -15,6 +15,7 @@ function CartModal({
   minus,
   changeHandler,
   handleSubmit,
+  deleteOrder,
 }) {
   if (keranjangDetail) {
     return (
@@ -60,7 +61,6 @@ function CartModal({
                 as="textarea"
                 rows="3"
                 name="keterangan"
-                placeholder="Pedas, Nasi Setengah"
                 value={keterangan}
                 onChange={(event) => changeHandler(event)}
               />
@@ -68,7 +68,12 @@ function CartModal({
             <Button variant="primary" type="submit" className="me-2">
               Save
             </Button>
-            <Button variant="danger">Delete</Button>
+            <Button
+              variant="danger"
+              onClick={() => deleteOrder(keranjangDetail.id)}
+            >
+              Delete
+            </Button>
           </Form>
         </Modal.Body>
       </Modal>
